@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevBoard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fc;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            transition: background 0.5s;
+        }
+        .container {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .main-content {
+            flex: 3;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .logo img {
+            width: 30px;
+            margin-right: 10px;
+        }
+        .mark-box{
+            display: flex;
+            background-color: #F4F7FF;
+        }
+        .mark-box img{
+            width: 20px;
+            height: 20px;
+        }
+        .mark-num{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .task-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background-color: #F4F7FF;
+        }
+        .highlight-box {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            flex-grow: 1;
+            margin: 0 20px;
+            cursor: pointer;
+        }
+        .highlight-img {
+            width: 20px;
+            vertical-align: middle;
+        }
+        .box {
+            background: #F4F7FF;
+            padding: 20px; 
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-width: 120px; 
+           
+        }
+        .box-calender{
+            display: flex;
+        }
+        .box-calender img{
+            width: 20px;
+            height: 20px;
+        }
+        .right-corner{
+            display: flex;
+            gap: 30px;
+        }
+        .task-number {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .task-box {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .task-count-box{
+            display: flex;
+        }
+        .task-count-box img{
+            width: 20px;
+            height: 20px;
+        }
+        .task-card {
+            background: #f1f3f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .task-card h3 {
+            margin: 0;
+        }
+        .completed {
+            background: #675afc;
+            color: white;
+            padding: 5px 10px;
+            display: inline-block;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+        .completed.disabled {
+            background: grey;
+            cursor: not-allowed;
+        }
+        .sidebar {
+            flex: 1;
+            margin-left: 20px;
+        }
+        .activity-log {
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .activity-log button {
+            background: #675afc;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .theme-button img {
+            width: 40px;
+
+cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <div class="header">
+                <div class="logo">
+                    <img src="assets/logo.png" alt="Logo">
+                    <span style="color: black; font-weight: bold;">Dev Board</span>
+                </div>
+                
+                   <div class="right-corner">
+                     <!-- markbox -->
+                    <div class="mark-box">
+                        <img src="assets/checkbox.png" alt="">
+                        <div class="mark-num">24</div>
+                    </div>
+                    <!-- theme button -->
+                <div class="theme-button" onclick="changeTheme()">
+                    <img src="assets/theme-btn.png" alt="Theme Button">
+                </div>
+                   </div>
+            </div>
+            <!-- 2nd part -->
+               <div>
+            <div class="task-info">
+                <div class="task-count-box">
+                    <img src="assets/checkbox.png" alt="">
+                    <div>
+                        <div>Task Assigned</div>
+                        <div><strong id="task-count">6</strong></div>
+                    </div>
+                </div>
+            <div class="highlight-box" onclick="openblogsPage()">
+                <img class="highlight-img" src="assets/board.png" alt="">Discover Something New Today!</div>
+
+                <div class="box">
+                  <div class="box-calender">
+                    <img src="assets/calender.png" alt="">
+                    <div><div>Wed,</div>
+                    <div class="task-number">Jul 28 2025</div></div>
+                  </div>
+                </div>
+            </div> 
+           </div>
+<!-- 3rd part -->
+        <div class="task-box" id="taskBox"></div>
+    </div>
+    <div class="sidebar">
+        <div class="activity-log">
+            <h3>Activity Log</h3>
+            <div id="log-content"></div>
+            <button onclick="clearActivityLog()">Clear History</button>
+        </div>
+    </div>
+</div>
+<script>
+    //complete section part
+    let taskCount = 6;
+    const tasks = [
+        { company: "Shop Ease", title: "Fix Mobile Button Issue",description:"Debug using Chrome DevTools,DevTools checks for overlaping elements", deadline: "21 March 2025" },
+        { company: "CloudSync", title: "Add Dark Mode", description:"Store the user's preference in localStorage, update CSS variables dynamically", deadline: "25 March 2025" },
+        { company: "Swift Pay", title: "Optimize  Home page ",description:"Debug using Chrome DevTools,DevTools checks for overlaping element", deadline: "31 March 2025" },
+        { company: "Meta", title: "Add new emoji 🤲",description:"Debug using Chrome DevTools,DevTools checks for overlaping element", deadline: "21 March 2025" },
+        { company: "Google LLC", title: "Integrate OpenAI API ",description:"Debug using Chrome DevTools,DevTools checks for overlaping element", deadline: "01 April 2025" },
+        { company: "GlassDoor", title: "Improve Job searching ",description:"Store the user's preference in localStorage, update CSS variables dynamically", deadline: "05 May 2025" }
+    ];
+
+   
+    const taskBox = document.getElementById('taskBox');
+    const taskCountElement = document.getElementById('task-count');
+    const logContent = document.getElementById('log-content');
+
+    function updateCounts() {
+        taskCountElement.textContent = taskCount;
+    }
+
+Afifa (Teletalk), [3/27/2025 11:32 PM]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fc;
+            padding: 20px;
+            text-align: center;
+            margin: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .logo {
+            font-weight: bold;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            width: 30px;
+            margin-right: 10px;
+        }
+        .back-button {
+            background: #675afc;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .heading{
+            align-items: center;
+        }
+        .blog-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+            text-align: left;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        .question {
+            margin: 15px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="assets/logo.png" alt="Logo">
+            <span style="color: black; font-weight: bold;">Dev Board</span>
+        </div>
+        <button class="back-button" onclick="goBack()">Back to Desk</button>
+    </div>
+    <div class="blog-container">
+        <h2 class="heading">Blogs</h2>
+        <div class="question">Question-1: What are the different ways to select an element in the DOM?
+            <br>
+            Ans:getElementById,className.
+        </div>
+        
+        <div class="question">Question-2: What is the difference between innerHTML, innerText, and textContent?
+            
+            Ans:innerHTML returns the HTML content inside an element,and innerText returns the visible text as displayed in the browser, excluding hidden elements and textContent returns the text content of an element, including hidden text.
+        </div>
+       
+  
+        <div class="question">Question-3. What is event delegation in the DOM?
+            
+            Ans: event delegation  is added to a parent element to handle events for multiple child elements. 
+        </div>
+       
+        
+
+        <div class="question">Question-4. What is event bubbling in the DOM?
+            Ans: event bubbling in the DOM works from the target element and finish at the root element.
+        </div>
+        
+        
+        
+        <div class="question">Question-5. How do you create, add, and remove elements using JavaScript?
+            Ans: createElement() method. we can insert it into the DOM using different methods like appendChild(). and  remove an element using removeChild() . 
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = "index.html"; 
+        }
+    </script>
+</body>
+</html>
